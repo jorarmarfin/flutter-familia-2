@@ -21,6 +21,7 @@ const mColorFran2 = Colors.orange;
 
 //Imagenes
 const imgLoading = 'assets/images/loading.gif';
+const imgLogoApp = 'assets/images/LogoAppFamilia.png';
 const fotoLucy = 'assets/images/lucy.png';
 const fotoLuis = 'assets/images/luis.png';
 const fotoFrancisco = 'assets/images/francisco.png';
