@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+   var tmp = 'temporal';
     return MaterialApp(
         theme: MyTheme.base,
         initialRoute: AppRoutes.initialRoute,
