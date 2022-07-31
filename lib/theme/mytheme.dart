@@ -65,3 +65,6 @@ BoxDecoration contenedorEstiloCircular() {
   return BoxDecoration(
       shape: BoxShape.circle, color: Colors.white.withOpacity(0.2));
 }
+
+
+

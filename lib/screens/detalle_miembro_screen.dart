@@ -12,6 +12,7 @@ late int myIndice;
 
 class DetalleMiembroScreen extends StatefulWidget {
   const DetalleMiembroScreen({Key? key}) : super(key: key);
+  static String routerName = 'detalle_miembro';
 
   @override
   State<DetalleMiembroScreen> createState() => _DetalleMiembroScreenState();
@@ -20,36 +21,43 @@ class DetalleMiembroScreen extends StatefulWidget {
 class _DetalleMiembroScreenState extends State<DetalleMiembroScreen> {
   @override
   Widget build(BuildContext context) {
-    final drupalProvider = Provider.of<DrupalProvider>(context);
-    myNid = drupalProvider.nid;
-    myIndice = drupalProvider.indice;
+    final firebaseProvider = Provider.of<FireBaseProvider>(context);
+    // final drupalProvider = Provider.of<DrupalProvider>(context);
+    // myNid = drupalProvider.nid;
+    // myIndice = drupalProvider.indice;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: myData[myIndice]['color2'],
+        backgroundColor: firebaseProvider.currentColor2,
         centerTitle: true,
         elevation: 0,
       ),
-      body: FutureBuilder(
-          future: drupalProvider.getMiembro(myNid),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else {
-              return _DetalleMiembro(
-                myColor: myData[myIndice]['color2'],
-                myFondo: myData[myIndice]['fondo'],
-                myFoto: myData[myIndice]['foto'],
-                myNombre: drupalProvider.miembroCurrent.nombre,
-                myDocumento: 'DNI: ' + drupalProvider.miembroCurrent.documento,
-                myFechaNacimiento:
-                    'Fecha nacimiento: ${drupalProvider.miembroCurrent.fechaNacimiento}',
-                myArchivoDocumento:
-                    '${drupalProvider.miembroCurrent.archivoDocumento}',
-                myArchivoCovid: '${drupalProvider.miembroCurrent.archivoCovid}',
-              );
-            }
-          }),
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8.0),
+            margin: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: firebaseProvider.currentColor2,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                CircleAvatar(
+                  maxRadius: 50,
+                  backgroundImage: NetworkImage(
+                      firebaseProvider.integranteSeleccionado.foto),
+                ),
+                Text(firebaseProvider.integranteSeleccionado.nombres)
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -142,8 +150,7 @@ class _Contenido extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, 'detalle_archivo',
-                      arguments: MiembroArchivoModels(
-                          myArchivoDocumento));
+                      arguments: MiembroArchivoModels(myArchivoDocumento));
                 },
                 child: _RecuadroBlanco(
                   informacionData: myDocumento,
@@ -161,10 +168,9 @@ class _Contenido extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, 'detalle_archivo',
-                      arguments: MiembroArchivoModels(
-                           myArchivoCovid));
+                      arguments: MiembroArchivoModels(myArchivoCovid));
                 },
-                child:const _RecuadroBlanco(
+                child: const _RecuadroBlanco(
                   informacionData: 'Carne de vacunacion',
                 ),
               ),
