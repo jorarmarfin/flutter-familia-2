@@ -36,6 +36,7 @@ class LoginScreen extends StatelessWidget {
               autocorrect: false,
               keyboardType: TextInputType.phone,
               style: const TextStyle(color: Colors.black),
+              obscureText: true,
               decoration: InputDecorations.loginInputDecoration('****',
                   'Contraseña', Colors.purple, Icons.lock_clock_outlined),
               onChanged: (value) => password = value),

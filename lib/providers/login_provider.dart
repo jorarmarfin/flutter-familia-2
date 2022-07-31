@@ -19,7 +19,8 @@ class LoginProvider extends ChangeNotifier {
   Future<String?> login(String email, String password) async {
     final Map<String, dynamic> authData = {
       'email': email,
-      'password': password
+      'password': password,
+      'returnSecureToken': true
     };
     final url = Uri.https(
         _baseUrl, '/v1/accounts:signInWithPassword', {'key': _firebaseToken});
@@ -44,5 +45,6 @@ class LoginProvider extends ChangeNotifier {
   Future estaLogeado() async {
     const storage = FlutterSecureStorage();
     token = storage.read(key: 'token').toString();
+    // token = '';
   }
 }

@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routerName: (context) => const HomeScreen(),
         LoginScreen.routerName: (context) => const LoginScreen(),
         DetalleMiembroScreen.routerName: (context) => const DetalleMiembroScreen(),
+        DetalleArchivoScreen.routerName: (context) => const DetalleArchivoScreen(),
       },
     );
   }
