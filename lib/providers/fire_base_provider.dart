@@ -16,8 +16,7 @@ class FireBaseProvider extends ChangeNotifier {
   final storage = const FlutterSecureStorage();
 
   Future getIntegrantes() async {
-    final url = Uri.https(_baseUrl, '/integrantes.json',
-        {'auth': await storage.read(key: 'token') ?? ''});
+    final url = Uri.https(_baseUrl, '/integrantes.json');
     final resp = await http.get(url);
     final Map<String, dynamic> integrantesMap = json.decode(resp.body);
     integrantes.clear();
@@ -26,7 +25,5 @@ class FireBaseProvider extends ChangeNotifier {
       integrantes.add(tmp);
     });
     return integrantes;
-
-    // librosDrupal = LibrosModel.fromJson(decodeData).libros;
   }
 }

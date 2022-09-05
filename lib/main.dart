@@ -31,14 +31,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    String rutaInicial =
-        // ignore: dead_code
-        (LoginProvider.token.isEmpty)
-            ? LoginScreen.routerName
-            : HomeScreen.routerName;
+
     return MaterialApp(
       theme: MyTheme.base,
-      initialRoute: rutaInicial,
+      initialRoute: HomeScreen.routerName,
       routes: {
         HomeScreen.routerName: (context) => const HomeScreen(),
         LoginScreen.routerName: (context) => const LoginScreen(),
